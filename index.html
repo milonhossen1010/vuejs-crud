@@ -79,7 +79,9 @@
 
               <div class="form-group">
                 <label style="padding: 15px 0px" class="border-light table-bordered d-block text-center" for="photo">
-                  <img id="load-img" class="shadow" style="height: 50px; width: 50px; border-radius: 50%; border: 2px solid #ddd;" src="photos/users/avatar.jpg" alt=""> <i class="fa fa-upload"> </i> Upload Photo</label>
+                  <img id="load-img" class="shadow"
+                    style="height: 50px; width: 50px; border-radius: 50%; border: 2px solid #ddd;"
+                    src="photos/users/avatar.jpg" alt=""> <i class="fa fa-upload"> </i> Upload Photo</label>
                 <input ref="file" id="photo" type="file" class="d-none">
               </div>
 
@@ -96,28 +98,29 @@
             <h3 style="cursor: pointer;" id="search">SEARCH</h3>
             <form id="searchForm">
               <div class="form-group">
-                 
+
                 <input v-model="search.key" @keyup="searchUser" class="form-control" type="text" placeholder="Search">
               </div>
-             
+
               <br>
-         
+
 
               <div class=" form-group">
-                <h5>Division</h5> 
+                <h5>Division</h5>
                 <ul class="list-inline division">
-                  <li :class="user.division" class="pr-2" v-for="user in all_division" >
-                 
+                  <li :class="user.division" class="pr-2" v-for="user in all_division">
+
                     <label :for="user.id">
-                    <input class="input" @change="searchUser" type="checkbox" :id="user.id" :value="user.division" v-model="search.division">
-                    <span>{{ user.division }} </span>
+                      <input class="input" @change="searchUser" type="checkbox" checked :id="user.id"
+                        :value="user.division" v-model="search.division">
+                      <span>{{ user.division }} </span>
                     </label>
                   </li>
 
                 </ul>
- 
-                
-<!-- 
+
+
+                <!-- 
                  <input @change="searchUser" type="checkbox" id="Dhaka" value="Dhaka" v-model="search.division">
                   <label for="Dhaka">Dhaka</label>
 
@@ -126,19 +129,22 @@
 
                   <input @change="searchUser" type="checkbox" id="Chitagong" value="Chitagong" v-model="search.division">
                   <label for="Chitagong">Chitagong</label> -->
-           
+
 
               </div>
 
               <div id="genderID" class=" form-group">
                 <h5>Gender</h5>
 
-                <label class="checkbox-inline"> <input @change="searchUser('all')" v-model="search.gender" name="g" type="radio" value="all"> All </label>
+                <label class="checkbox-inline"> <input id="all_gender" @change="searchUser('all')"
+                    v-model="search.gender" name="g" type="radio" value="all"> All </label>
 
-                <label class="checkbox-inline"> <input @change="searchUser('Male')" v-model="search.gender" name="g" type="radio" value="male"> Male </label>
+                <label class="checkbox-inline"> <input @change="searchUser('Male')" v-model="search.gender" name="g"
+                    type="radio" value="male"> Male </label>
 
-                <label class="checkbox-inline"> <input @change="searchUser('Female')" v-model="search.gender" name="g" type="radio" value="female"> Female </label>
-              </div> 
+                <label class="checkbox-inline"> <input @change="searchUser('Female')" v-model="search.gender" name="g"
+                    type="radio" value="female"> Female </label>
+              </div>
             </form>
           </div>
 
@@ -158,7 +164,11 @@
               <th>Photo</th>
               <th colspan="3">Action</th>
             </tr>
-
+            <tr v-if="all_users==false">
+              <td colspan="7">
+                <h4 class=" text-center text-danger">কোন তথ্য খুঁজে পাওয়া যায়নি। </h4>
+              </td>
+            </tr>
             <tr v-for="user in all_users">
               <td class="userData">{{ user.name }}</td>
               <td class="userData">{{ user.email }}</td>
@@ -173,8 +183,8 @@
               </td>
 
               <td class="pr-0">
-                <button v-on:click="singleUserShow(user.id)" data-toggle="modal" data-target="#myModal" class="btn btn-success btn-sm"><i
-                    class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                <button v-on:click="singleUserShow(user.id)" data-toggle="modal" data-target="#myModal"
+                  class="btn btn-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
               </td>
 
               <td class="pr-0">
@@ -183,7 +193,7 @@
               </td>
 
             </tr>
-<!-- 
+            <!-- 
             <tr v-if="search_users" v-for="user in search_users">
               <td class="userData">{{ user.name }}</td>
               <td class="userData">{{ user.email }}</td>
@@ -208,7 +218,7 @@
               </td>
 
             </tr> -->
-            
+
 
           </table>
         </div>
@@ -275,7 +285,7 @@
               <div class="form-group">
                 <input v-model="singleUser.id" type="hidden">
                 <input v-model="singleUser.photo" type="hidden">
-                <input v-model="singleUser.name"  class="form-control" type="text" name="name" placeholder="Name">
+                <input v-model="singleUser.name" class="form-control" type="text" name="name" placeholder="Name">
               </div>
               <div class="form-group">
                 <input v-model="singleUser.email" class="form-control" type="email" name="email" placeholder="Email">
@@ -301,7 +311,7 @@
               <div class="form-group">
                 <h5><strong> Gender</strong></h5>
                 <div class="form-check form-check-inline">
-                 
+
                   <input name="gender" class="form-check-input" v-model="singleUser.gender" type="radio" value="Male"
                     id="male1">
                   <label class="form-check-label" for="male1">Male</label>
@@ -315,10 +325,12 @@
               </div>
 
               <div class="form-group">
-                
-                <label style="padding: 15px 0px" class="border-light table-bordered d-block text-center" for="edit-photo">
-                  <img id="load-photo" class="shadow" style="height: 50px; width: 50px; border-radius: 50%; border: 2px solid #ddd;" :src="'photos/users/'+singleUser.photo " alt=""> <i
-                    class="fa fa-upload"> </i>  Upload Photo</label>
+
+                <label style="padding: 15px 0px" class="border-light table-bordered d-block text-center"
+                  for="edit-photo">
+                  <img id="load-photo" class="shadow"
+                    style="height: 50px; width: 50px; border-radius: 50%; border: 2px solid #ddd;"
+                    :src="'photos/users/'+singleUser.photo " alt=""> <i class="fa fa-upload"> </i> Upload Photo</label>
                 <input ref="editPhoto" id="edit-photo" type="file" class="d-none">
               </div>
 
@@ -334,7 +346,7 @@
   </div>
 
 
- 
+
   <!-- JS FILES  -->
   <script src="assets/js/jquery-3.4.1.min.js"></script>
   <script src="assets/js/popper.min.js"></script>

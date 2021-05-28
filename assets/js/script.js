@@ -36,8 +36,28 @@ $(document).ready(function () {
 
     //division and Gender Show hide
     $('#genderID').hide();
-    $(".division li").click(function(){
-        $('#genderID').show();
+    $(".division li input").click(function(){
+        // $('#genderID').hide();
+        // $(".input:checked").each(function() {
+        //     $('#genderID').show();
+        // });
+
+        // if($('.input').prop("checked") == true){
+        //     $('#genderID').show();
+        // }
+        // else if($('.input').prop("checked") == false){
+        //     $('#genderID').hide();
+        // }
+
+        
+        // if($(this).is(":checked")){
+        //     $('#genderID').show();
+        // }
+        // else if($(this).is(":not(:checked)")){
+        //     $('#genderID').hide();
+        // }
+
+        
     });
 
   
@@ -214,19 +234,29 @@ const root = new Vue({
         //Search 
         searchUser: function (gender) {
             // this.search_users.push(this.all_users.find(div => div.division == division));
-           
-           
+            
+            //Key word get
             let search_text = root.search.key;
-
+            // Form data
             let searchDiv = new FormData();
+           
+            
             searchDiv.append('div', this.search.division);
+  
+           
+           if(this.search.division==''){
+            $('#genderID').hide();
+            searchDiv.append('gender', '');
+           }else {
+            $('#genderID').show();
             searchDiv.append('gender', this.search.gender);
+           }
              
             axios.post('inc/user.php?action=search&s=' + search_text , searchDiv).then(function (response) {
                 
            
                 root.all_users = response.data; 
-                console.log(response.data);
+                // console.log(response.data);
 
             });
 

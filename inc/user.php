@@ -149,6 +149,8 @@ if($action == 'search'){
         }elseif ($gender == 'female' OR $gender == 'male') {
             
              $gen = " && gender IN ('$gender') ";
+        }elseif(!isset($_POST['div'])){
+            $gen = '';
         } else {
              $gen = '';
         }
